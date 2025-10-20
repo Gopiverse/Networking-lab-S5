@@ -14,14 +14,14 @@ public chatServer() { }
 // methods
 public void createSocket() {
 	try {
-	serverSocket = new ServerSocket(3339); 
+		serverSocket = new ServerSocket(3339); 
 		while (true) {
-		socket = serverSocket.accept();
-		inStream = socket.getInputStream(); 
-		outStream = socket.getOutputStream();
-		System.out.println("Connected");
-		createReadThread();
-		createWriteThread();
+			socket = serverSocket.accept();
+			inStream = socket.getInputStream(); 
+			outStream = socket.getOutputStream();
+			System.out.println("Connected");
+			createReadThread();
+			createWriteThread();
 		}
 	} catch (IOException io) {
 		io.printStackTrace();
@@ -33,8 +33,8 @@ public void createReadThread() {
 		public void run() {
 			while (socket.isConnected()) {
 				try {
-				byte[] readBuffer = new byte[200];
-				int num = inStream.read(readBuffer);
+					byte[] readBuffer = new byte[200];
+					int num = inStream.read(readBuffer);
 					if (num > 0) {
 						byte[] arrayBytes = new byte[num];
 						System.arraycopy(readBuffer, 0, arrayBytes, 0, num);
@@ -43,15 +43,14 @@ public void createReadThread() {
 					} else {
 						notify();
 					}
-				}
-				catch (SocketException se) {
+				} catch (SocketException se) {
 					System.exit(0);
 				} catch (IOException i) {
 					i.printStackTrace();
 				}
 			}
 		}
-		};
+	};
 	readThread.setPriority(Thread.MAX_PRIORITY); 
 	readThread.start();
 }
@@ -66,8 +65,8 @@ public void createWriteThread() {
 					String typedMessage = inputReader.readLine();
 						if (typedMessage != null && typedMessage.length() > 0) {
 							synchronized (socket) {
-							outStream.write(typedMessage.getBytes("UTF-8"));
-							sleep(100);
+								outStream.write(typedMessage.getBytes("UTF-8"));
+								sleep(100);
 							}
 						}
 				} catch (IOException i) {

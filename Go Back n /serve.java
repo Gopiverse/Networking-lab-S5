@@ -1,12 +1,15 @@
 import java.io.*;
-import java.net.ServerSocket;
+import java.net.*;
+/*import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
+import java.net.SocketException;*/
+
 
 public class serve {
 	static ServerSocket serverSocket;
 	static DataInputStream dis;
 	static DataOutputStream dos;
+	
 	public static void main(String args[]) throws SocketException {
 		try {
 			int a[] = {30, 40, 50, 60, 70, 80, 90, 100};

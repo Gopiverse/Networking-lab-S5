@@ -1,27 +1,32 @@
 import java.lang.System;
 import java.net.*;
+import java.io.*;
+import java.text.*;
+import java.util.*;
 /*import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException; 
 */
-import java.io.*;
-import java.text.*;
+
 //import java.util.Random;
-import java.util.*;
+
 
 public class GoClient {
 	static Socket connection;
+	static DataOutputStream out;
+	static DataInputStream in;
+	
 	public static void main(String args[]) throws SocketException {
 		try {
-			int v[] = new int[10];
-			int n=0;
-			Random rands = new Random();
-			int rand = 0;
 			InetAddress addr = InetAddress.getByName("LocalHost");
-			System.out.println(addr);
 			connection = new Socket(addr, 8011);
-			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-			DataInputStream in = new DataInputStream(connection.getInputStream());
+			out = new DataOutputStream(connection.getOutputStream());
+			in = new DataInputStream(connection.getInputStream());
+			
+			int v[] = new int[10];
+			int n=0, rand = 0;
+			Random rands = new Random();
+
 			int p = in.read(); //length
 			System.out.println("No: of frames:"+p);
 			for(int i=0; i<p; i++) {
